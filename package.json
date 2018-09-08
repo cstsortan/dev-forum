@@ -1,0 +1,23 @@
+{
+  "name": "ts1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server --open",
+    "build": "webpack --mode=production"
+  },
+  "dependencies": {
+    "@polymer/lit-element": "^0.5.2",
+    "@webcomponents/webcomponentsjs": "^2.1.1"
+  },
+  "devDependencies": {
+    "@webpack-cli/serve": "^0.1.0",
+    "css-loader": "^1.0.0",
+    "ts-loader": "^5.0.0",
+    "typescript": "^3.0.3",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.8"
+  }
+}
