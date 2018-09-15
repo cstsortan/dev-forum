@@ -1,8 +1,14 @@
-body {
-    --primary-color: #007ACC;
-    --danger-color: red;
+/** Ionic CSS Variables **/
+home-page, df-ui-auth {
+    display: block;
     height: 100%;
+}
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    width: 100%;
     padding: 0;
     margin: 0;
-    
 }

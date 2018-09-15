@@ -1,5 +1,5 @@
 import { ActionType, getType } from 'typesafe-actions';
-import * as counterActions from '../actions';
+import * as counterActions from '../actions/counter-actions';
 
 import * as cuid from 'cuid';
 

@@ -1,0 +1,72 @@
+[debug] [2018-09-13T18:46:36.052Z] ----------------------------------------------------------------------
+[debug] [2018-09-13T18:46:36.056Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\D4Vinci\AppData\Local\Yarn\Data\global\node_modules\firebase-tools\bin\firebase serve
+[debug] [2018-09-13T18:46:36.057Z] CLI Version:   3.18.4
+[debug] [2018-09-13T18:46:36.057Z] Platform:      win32
+[debug] [2018-09-13T18:46:36.058Z] Node Version:  v6.11.5
+[debug] [2018-09-13T18:46:36.058Z] Time:          Thu Sep 13 2018 21:46:36 GMT+0300 (GTB Daylight Time)
+[debug] [2018-09-13T18:46:36.058Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-09-13T18:46:36.086Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-09-13T18:46:36.087Z] > authorizing via signed-in user
+[debug] [2018-09-13T18:46:36.090Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-09-13T18:46:36.091Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/jxoMRkD-ppv0bDX3rsi0sNvyPN53oUWrxKLkQj0gf38',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Thu Sep 13 2018 21:46:36 GMT+0300 (GTB Daylight Time)
+[debug] [2018-09-13T18:46:36.625Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-13T18:46:36.664Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/dev-forum-45f8b  
+  
+ Thu Sep 13 2018 21:46:36 GMT+0300 (GTB Daylight Time)
+[debug] [2018-09-13T18:46:37.742Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-13T18:46:37.743Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/dev-forum-45f8b/tokens  
+  
+ Thu Sep 13 2018 21:46:37 GMT+0300 (GTB Daylight Time)
+[debug] [2018-09-13T18:46:38.437Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-13T18:46:38.440Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/dev-forum-45f8b  
+  
+ Thu Sep 13 2018 21:46:38 GMT+0300 (GTB Daylight Time)
+[debug] [2018-09-13T18:46:39.744Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\D4Vinci\Desktop\dev-forum'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2018-09-13T18:46:41.219Z] Fetching environment
+[debug] [2018-09-13T18:46:41.227Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/975027577006:getServerAppConfig  
+  
+ Thu Sep 13 2018 21:46:41 GMT+0300 (GTB Daylight Time)
+[debug] [2018-09-13T18:46:41.228Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/975027577006/clients/_:getWebAppConfig  
+  
+ Thu Sep 13 2018 21:46:41 GMT+0300 (GTB Daylight Time)
+[debug] [2018-09-13T18:46:41.761Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-13T18:46:41.762Z] Starting @google-cloud/functions-emulator
+[debug] [2018-09-13T18:46:41.812Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: dist
+[info] +  hosting: Local server: http://localhost:5000
+
+[debug] [2018-09-13T18:46:45.475Z] Parsing function triggers
+[info] +  functions: defForum: http://localhost:5001/dev-forum-45f8b/us-central1/defForum
+[info] [hosting] Rewriting / to local function defForum
+[info] [hosting] Rewriting /favicon.ico to local function defForum
+[info] [hosting] Rewriting / to local function defForum
+[info] [hosting] Rewriting / to local function defForum
+[info] [hosting] Rewriting / to local function defForum
+[info] [hosting] Rewriting / to local function defForum
+[info] [hosting] Rewriting / to local function defForum
+[info] [hosting] Rewriting / to local function defForum
+[info] [hosting] Rewriting / to local function defForum
+[info] [hosting] Rewriting / to local function defForum
+[info] [hosting] Rewriting / to local function defForum
+[info] [hosting] Rewriting / to local function defForum
+[info] [hosting] Rewriting / to local function defForum
+[info] [hosting] Rewriting / to local function defForum
+[info] [hosting] Rewriting / to local function defForum
+[info] [hosting] Rewriting / to local function defForum
+[info] [hosting] Rewriting / to local function defForum
+[info] [hosting] Rewriting / to local function defForum
+[info] [hosting] Rewriting / to local function defForum
+[info] [hosting] Rewriting / to local function defForum
+[info] [hosting] Rewriting / to local function defForum
+[info] [hosting] Rewriting / to local function defForum

@@ -1,4 +1,6 @@
 const path = require('path');
+const webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     mode: "development",
@@ -6,22 +8,45 @@ module.exports = {
     devtool: 'inline-source-map',
     entry: "./src/index.ts",
     devServer: {
-        contentBase: './dist'
+        contentBase: './dist',
+        hot: true,
+        historyApiFallback: {
+            rewrites: [
+                {
+                    from: /.*/, 
+                    to: 'index.html'
+                }
+            ]
+        }
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
     },
     module: {
         rules: [
             {
                 test: /\.ts$/,
-                use: "ts-loader",
                 exclude: /node_modules/,
+                use: [
+                    // {
+                    // loader: 'minify-lit-html-loader',
+                    // },
+                    {
+                    loader: 'ts-loader'
+                    },
+                ]
             },
         ]
     },
     resolve: {
         extensions: ['.ts', '.js']
     },
+    plugins: [
+        // new webpack.HotModuleReplacementPlugin(),
+        new UglifyJSPlugin({
+            sourceMap: true,
+            extractComments: true,
+        }),
+    ],
 }
