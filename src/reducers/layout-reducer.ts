@@ -1,7 +1,7 @@
 import { ActionType, getType } from 'typesafe-actions';
 import * as layoutActions from '../actions/layout-actions';
 
-interface LayoutState {
+export interface LayoutState {
     sheetOpen: boolean;
 }
 

@@ -1,3 +1,4 @@
 import './router-actions';
-import './counter-actions';
 import './layout-actions';
+import './posts-list-actions';
+import './auth-actions';

@@ -6,8 +6,6 @@ import { routes } from "../../routes";
 import { navigate } from "../../actions/router-actions";
 import { toggleBottomSheet } from "../../actions/layout-actions";
 
-
-
 class DfBottomOptions extends LitElement {
 
     @property({
@@ -31,8 +29,13 @@ class DfBottomOptions extends LitElement {
         });
     }
 
-    _updateStoreState() {
+    _updateStoreState(): void {
         this.currentTag = store.getState().router.tag!;
+    }
+
+    _chooseTag(tag: Tag): void {
+        store.dispatch(toggleBottomSheet());
+        store.dispatch(navigate(tag));
     }
 
     render() {
@@ -40,20 +43,14 @@ class DfBottomOptions extends LitElement {
         const tagsList = this.tags.map(tag => {
             return html`<df-tag-option
             class="${this.currentTag === tag ? 'enabled-route': ''}"
-            @click="${() => {
-                store.dispatch(navigate(tag))
-                store.dispatch(toggleBottomSheet())
-            }}"
+            @click="${() => this._chooseTag(tag)}"
             .tag="${tag}"></df-tag-option>`;
         });
 
         const staticRoutes = routes.map(route => {
             return html`<df-tag-option
             class="${this.currentTag === route ? 'enabled-route': ''}"
-            @click="${() => {
-                store.dispatch(navigate(route))
-                store.dispatch(toggleBottomSheet())
-            }}"
+            @click="${() => this._chooseTag(route)}"
             .tag="${route}"></df-tag-option>`;
         })
 
@@ -76,7 +73,6 @@ class DfBottomOptions extends LitElement {
         </div>
         `
     }
-
 }
 
 customElements.define('df-bottom-options', DfBottomOptions)

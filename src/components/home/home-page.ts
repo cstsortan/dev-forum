@@ -3,9 +3,12 @@ import { store } from "../../store";
 import { Route, routes } from "../../routes";
 import { toggleBottomSheet } from "../../actions/layout-actions";
 import { navigate } from "../../actions/router-actions";
+import { Post } from "../../interfaces/Post";
 
 export class HomePage extends LitElement {
-    @property()
+    @property({
+        reflect: false,
+    })
     scrolled!: boolean ;
 
     @property({
@@ -13,8 +16,18 @@ export class HomePage extends LitElement {
     })
     route!: Route;
 
-    @property()
+    @property({
+        reflect:false,
+    })
     sheetOpen: boolean = true;
+
+    @property({
+        reflect: false,
+    })
+    posts!: Post[];
+
+    @property({reflect: false})
+    selectedPost!: Post | null;
 
     connectedCallback() {
         document.addEventListener('scroll', (e: any) => {
@@ -23,14 +36,14 @@ export class HomePage extends LitElement {
         this._stateChanged();
         store.subscribe(() => {
             this._stateChanged();
-        })
+        });
     }
-
-    
 
     _stateChanged() {
         this.route = store.getState().router;
         this.sheetOpen = store.getState().layout.sheetOpen;
+        this.posts = store.getState().postsList.posts;
+        this.selectedPost = store.getState().postsList.selectedPost;
     }
 
     openNewPostForm() {
@@ -44,15 +57,18 @@ export class HomePage extends LitElement {
 
     render() {
         if(!this.route.tag) {
-            if(this.route.routeName == "new-post") {
+            if(this.route.routeName === "new-post") {
                 return html`
                     <df-post-form></df-post-form>
                 `;
             }
-            else if(this.route.routeName == 'auth') {
+            else if(this.route.routeName === 'auth') {
                 return html`
                     <df-auth></df-auth>
                 `;
+            }
+            else if(this.route.routeName === 'post-page') {
+                return html`<post-page .post="${this.selectedPost}"></post-page>`;
             } else {
                 return html`
                     <h1>Hold on! This route isn't there yet!</h1>
@@ -66,11 +82,11 @@ export class HomePage extends LitElement {
         if(this.route.tag.id === 'tags') {
             renderedPage = html`
             <df-tags-list>Tags...</df-tags-list>
-            `
+            `;
         } else {
             renderedPage = html`
-            <posts-list class="no-scroll"></posts-list>
-            `
+            <posts-list .posts="${this.posts}" class="no-scroll"></posts-list>
+            `;
         }
 
         return html`

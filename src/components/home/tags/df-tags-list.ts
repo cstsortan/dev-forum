@@ -4,6 +4,7 @@ import { getTagsCol } from "../../../services/posts-service";
 import { Subscription } from "rxjs";
 import { store } from "../../../store";
 import { navigate } from "../../../actions/router-actions";
+import { queryTag } from "../../../actions/posts-list-actions";
 
 class DfTagsList extends LitElement {
     
@@ -34,13 +35,15 @@ class DfTagsList extends LitElement {
         </style>
         ${this.tags.map(tag => {
             return html`
-                <df-tag-card @click="${() => {
-                    store.dispatch(navigate(tag))
-                }}" .tag=${tag}></df-tag-card>
+                <df-tag-card @click="${() => this._tagChosen(tag)}" .tag=${tag}></df-tag-card>
             `
         })}
         </div>
         `
+    }
+    _tagChosen(tag: Tag): void {
+        store.dispatch(navigate(tag));
+        store.dispatch(queryTag(tag.id));
     }
 }
 

@@ -18,6 +18,6 @@ import './home/df-post-form';
 import './bottom-options';
 import './home/tags';
 
-
+import './home/posts/post-page';
 
 import './auth/auth';

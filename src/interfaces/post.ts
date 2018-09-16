@@ -8,4 +8,5 @@ export interface Post {
     tag?: Tag;
     author?: AppUser;
     timestamp?: any;
+    responses?: number;
 }

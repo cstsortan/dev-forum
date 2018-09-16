@@ -55,7 +55,7 @@ export class DfTagCard extends LitElement {
                 ${this.tag.description}
             </div>
             <div class="bottom">
-                ${"No posts yet"}
+                ${this.tag.latestPost ? this.tag.latestPost : "No posts yet"}
             </div>
         </div>
         `;

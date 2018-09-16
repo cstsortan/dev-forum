@@ -5,7 +5,6 @@ import { Tag } from '../interfaces/tag';
 
 const initialState: Route = {
     tag: routes[0],
-    // routeName: 'new-post'
 };
 
 export type RouterAction = ActionType<typeof routerActions>;
@@ -32,6 +31,11 @@ export function routerReducer(state = initialState, action: RouterAction): Route
                     routeName: action.payload as string
                 }
             }
+        case getType(routerActions.openPost): 
+            return {
+                routeName: 'post-page',
+                param: action.payload.id,
+            };
         default:
             return state;
     }

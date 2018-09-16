@@ -9,7 +9,7 @@ module.exports = {
     entry: "./src/index.ts",
     devServer: {
         contentBase: './dist',
-        hot: true,
+        // hot: true,
         historyApiFallback: {
             rewrites: [
                 {
@@ -29,9 +29,9 @@ module.exports = {
                 test: /\.ts$/,
                 exclude: /node_modules/,
                 use: [
-                    // {
-                    // loader: 'minify-lit-html-loader',
-                    // },
+                    {
+                    loader: 'minify-lit-html-loader',
+                    },
                     {
                     loader: 'ts-loader'
                     },

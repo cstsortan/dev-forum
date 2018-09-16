@@ -9,18 +9,15 @@ const fs = require('fs')
 const path = require('path')
 const express = require('express')
 const indexHTML = fs.readFileSync(path.resolve(__dirname, 'index.html'))
-const db = admin.firestore()
+const db = admin.firestore();
 const postsCol = db.collection('posts').orderBy('timestamp', 'desc').limit(10);
-const app = express()
+const app = express();
+const tagsCol = db.collection('tags');
 
 app.get('/', (req, res) => {
     res.set('Cache-Control', 'public, max-age=30, s-maxage=60');
     postsCol.get().then(snap => {
-        const posts = snap.docs.map(doc => {
-            let post = doc.data();
-            post.id = doc.id;
-            return post;
-        })
+        const posts = snap.docs.map(mapDocToPost)
         res.send(indexHTML.toString().replace("/*SSR*/", "window.__posts = "+JSON.stringify(posts)))
         return;
     }).catch(err => {
@@ -33,11 +30,7 @@ app.get('/', (req, res) => {
 app.get('/api/posts', (req, res) => {
     res.set('Cache-Control', 'public, max-age=30, s-maxage=60');
     postsCol.get().then(snap => {
-        res.send(snap.docs.map(doc => {
-            let post = doc.data()
-            post.id = doc.id
-            return post
-        }))
+        res.send(snap.docs.map(mapDocToPost))
         return
     }).catch(err => {
         res.sendStatus(404).send({error: err})
@@ -45,3 +38,28 @@ app.get('/api/posts', (req, res) => {
 })
 
 exports.defForum = functions.https.onRequest(app);
+
+exports.onPostCreated = functions.firestore
+.document('posts/{postId}')
+.onCreate((snapshot, context) => {
+    const post = mapDocToPost(snapshot);
+    return tagsCol.doc(post.tag.id).set({latestPost: post.title}, {merge: true});
+});
+
+exports.onReplySubmitted = functions.firestore
+.document('post-responses/{responseId}')
+.onCreate((snapshot, context) => {
+    // return db.collection('posts').doc(snapshot.data().rootPost.id).set({
+        
+    // }, {merge: true});
+    return admin.firestore().runTransaction(transaction => {
+        return transaction.get(db.collection('posts').doc(snapshot.data().rootPost.id))
+            .then(doc => transaction.set(doc.ref, {responses: doc.data().responses + 1 || 1}, {merge: true}));
+    });
+});
+
+const mapDocToPost = (doc) => {
+    let post = doc.data()
+    post.id = doc.id
+    return post;
+}

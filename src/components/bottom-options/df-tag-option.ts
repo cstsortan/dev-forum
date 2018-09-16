@@ -5,12 +5,7 @@ export class DfTagOption extends LitElement {
 
     @property({reflect: false})
     tag!: Tag;
-
-    constructor() {
-        super();
-        let tag = this.shadowRoot!.querySelector('span');
-    }
-
+    
     render() {
         return html`
         <style>
