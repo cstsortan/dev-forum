@@ -135,7 +135,7 @@ export class DfAuth extends LitElement {
         @click="${() => store.dispatch(navigate(routes[0]))}"
         class="back-btn" slot="start">back</div>
         </app-bar>
-        ${this.useFirebaseUI ? html`<df-ui-auth @sign-in-success="${() => this._signInSuccess()}"></df-ui-auth>` : this._buildAuthForm()}
+        ${this.useFirebaseUI ? html`<df-ui-auth @signin-success="${() => this._signInSuccess()}"></df-ui-auth>` : this._buildAuthForm()}
         `;
     }
 

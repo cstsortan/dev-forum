@@ -1,10 +1,11 @@
 import { LitElement, html, property } from "@polymer/lit-element";
 import { Tag } from "../../../interfaces/tag";
-import { getTagsCol } from "../../../services/posts-service";
 import { Subscription } from "rxjs";
 import { store } from "../../../store";
 import { navigate } from "../../../actions/router-actions";
 import { queryTag } from "../../../actions/posts-list-actions";
+import { getState$ } from "../../../utils/get-state";
+import { AppState } from "../../../reducers";
 
 class DfTagsList extends LitElement {
     
@@ -16,7 +17,8 @@ class DfTagsList extends LitElement {
     _sub!: Subscription;
 
     connectedCallback() {
-        this._sub = getTagsCol().subscribe(tags => this.tags = tags);
+        this._sub = getState$(store)
+            .subscribe(state => this.tags = (state as AppState).postsList.tags);
     }
 
     disconnectedCallback() {

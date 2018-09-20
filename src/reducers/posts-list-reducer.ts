@@ -1,6 +1,7 @@
 import * as postsListActions from '../actions/posts-list-actions';
 import { getType, ActionType } from 'typesafe-actions';
 import { Post } from '../interfaces/Post';
+import { Tag } from '../interfaces/tag';
 
 export type PostsListAction = ActionType<typeof postsListActions>;
 
@@ -9,12 +10,14 @@ export class PostsState {
     limit: number;
     query: string[]|null;
     selectedPost: Post|null;
+    tags: Tag[];
 
     constructor() {
         this.posts = [];
         this.limit = 10;
         this.query = null;
         this.selectedPost = null;
+        this.tags = [];
     }
 }
 
@@ -32,7 +35,6 @@ export function postsListReducer(state = initialState, action: PostsListAction):
                 ...state,
                 query: null,
                 limit: 10,
-                posts: [],
             } as PostsState;
         case getType(postsListActions.showMorePosts):
             return {
@@ -43,13 +45,19 @@ export function postsListReducer(state = initialState, action: PostsListAction):
             return {
                 ...state as PostsState,
                 query: ['tag.id', '==', action.payload],
-                posts: [],
             } as PostsState;
         case getType(postsListActions.selectPost):
             return {
                 ...state,
                 selectedPost: action.payload,
             } as PostsState;
+
+        case getType(postsListActions.updateTags):
+            return {
+                ...state,
+                tags: action.payload,
+            }
+
         default: return state;
     }
 }

@@ -103,16 +103,58 @@ export class HomePage extends LitElement {
             }
             posts-list, df-tags-list {
                 display: block;
-                position: absolute;
-                top: 46px;
                 width: 100%;
-                height: calc(100% - 46px);
+                flex: 8;
+                margin-top: 10px;
             }
             .shadow {
                 box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
             }
             .btn-new-post {
-                padding: 5px;
+                margin-right: 5px;
+                padding: 3px;
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #ECEDEE
+            }
+            buttom-sheet {
+                position: fixed;
+            }
+            .page-container {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+            }
+            df-tag-header-bar {
+                display: block;
+                margin-top: 47px;
+            }
+            .topPadding {
+                height: 47px;
+                display: block;
+            }
+            @media only screen and (min-width: 800px) {
+                bottom-sheet.sheet {
+                    display: none;
+                }
+                .page-container {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                }
+                posts-list {
+                    flex: 12;
+                }
+                .side-spacing {
+                    flex: 2;
+                }
+                .btn-new-post {
+                    display: none;
+                }
             }
         </style>
         <app-bar class="${this.scrolled ? 'shadow' : ''}">
@@ -121,8 +163,17 @@ export class HomePage extends LitElement {
             </div>
             <div @click="${() => this.handleBarTitleClick()}">${this.route.tag.name}</div>
         </app-bar>
-        ${renderedPage}
+        ${this.route.tag!==null 
+            && this.route.tag !== routes[0] 
+            && this.route.tag !== routes[1] 
+            ? html`<df-tag-header-bar .tag="${this.route.tag}"></df-tag-header-bar>`:html`<div class="topPadding"></div>`}
+        <div class="page-container">
+            <div class="side-spacing"></div>
+            ${renderedPage}
+            <div class="side-spacing"></div>
+        </div>
         <bottom-sheet
+            class="sheet"
             @bs-close="${() => this.handleSheetClose()}" 
             .open="${this.sheetOpen}">
             <df-bottom-options

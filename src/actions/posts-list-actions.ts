@@ -1,5 +1,6 @@
 import { createStandardAction } from "typesafe-actions";
 import { Post } from "../interfaces/Post";
+import { Tag } from "../interfaces/tag";
 
 export const updatePosts 
     = createStandardAction('posts-list/UPDATE_POSTS')<Post[]>();
@@ -15,3 +16,6 @@ export const queryTag
 
 export const selectPost
     =createStandardAction('posts-list/SELECT_POST')<Post>();
+
+export const updateTags
+    =createStandardAction('posts-list/UPDATE_TAGS')<Tag[]>();

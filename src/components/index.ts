@@ -17,6 +17,7 @@ import './home/df-post-form';
 
 import './bottom-options';
 import './home/tags';
+import './home/df-tag-header-bar';
 
 import './home/posts/post-page';
 

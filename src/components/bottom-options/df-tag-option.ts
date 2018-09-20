@@ -24,6 +24,17 @@ export class DfTagOption extends LitElement {
             margin-right: 8px;
             border-radius: 4px;
         }
+        @media only screen and (min-width: 800px) {
+            :host {
+                height: 35px;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+            .tagColor {
+                height: 14px;
+                width: 18px;
+            }
+        }
         </style>
         <div .style="background-color: ${this.tag.colour}" class="tagColor"></div>
         <div class="tag">

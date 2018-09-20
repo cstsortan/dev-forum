@@ -9,14 +9,18 @@ export class DfUiAuth extends HTMLElement {
         const fbUi = ui.auth.AuthUI.getInstance() ||  new ui.auth.AuthUI(app.auth());
         fbUi.start(this, {
             signInOptions: [
-                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                {
+                    provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                    authMethod: 'https://accounts.google.com',
+                    clientId: '975027577006-qi4o5qo01uflacv6osvo42appm6jmg2u.apps.googleusercontent.com',
+                },
                 {
                     provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
                     requireDisplayName: true,
                 }
-                
             ],
-            credentialHelper: ui.auth.CredentialHelper.NONE,
+            signInFlow: 'popup',
+            credentialHelper: ui.auth.CredentialHelper.GOOGLE_YOLO,
             callbacks: {
                 signInSuccessWithAuthResult: (authResult, redirectUrl) => {
                     const user = authResult.user as firebase.User;

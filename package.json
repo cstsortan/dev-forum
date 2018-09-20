@@ -11,7 +11,7 @@
     "deploy:full": "npm run deploy:web && npm run deploy:server"
   },
   "dependencies": {
-    "@polymer/lit-element": "^0.6.0",
+    "@polymer/lit-element": "^0.6.1",
     "@webcomponents/webcomponentsjs": "^2.0.0-beta.3",
     "cuid": "^2.1.4",
     "fast-deep-equal": "^2.0.1",

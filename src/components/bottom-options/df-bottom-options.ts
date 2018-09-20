@@ -1,10 +1,12 @@
 import { LitElement, html, property } from "@polymer/lit-element";
 import { Tag } from "../../interfaces/tag";
-import { getTagsCol } from "../../services/posts-service";
 import { store } from "../../store";
 import { routes } from "../../routes";
 import { navigate } from "../../actions/router-actions";
 import { toggleBottomSheet } from "../../actions/layout-actions";
+import { getState$ } from "../../utils/get-state";
+import { AppState } from "../../reducers";
+import { Subscription } from "rxjs";
 
 class DfBottomOptions extends LitElement {
 
@@ -21,12 +23,20 @@ class DfBottomOptions extends LitElement {
     }) 
     showTags: boolean = true;
 
+    _storeSub!: Subscription;
+
     connectedCallback() {
-        getTagsCol().subscribe(tags => this.tags = tags);
         this._updateStoreState();
         store.subscribe(() => {
             this._updateStoreState();
         });
+
+        this._storeSub = getState$(store)
+            .subscribe(state => this.tags = (state as AppState).postsList.tags);
+    }
+
+    disconnectedCallback() {
+        this._storeSub.unsubscribe();
     }
 
     _updateStoreState(): void {

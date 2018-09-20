@@ -25,33 +25,30 @@ export class AppBar extends LitElement {
             align-items: center;
             font-size: 18px;
             flex: 1;
-            cursor: pointer;
         }
         .app-bar-title:active {
             opacity: 0.6;
         }
-        .action-create-post {
+        .end {
             align-self: center;
             flex: 0;
             color: #7A8185;
             font-size: 18px;
-            cursor: pointer;
         }
-        .drawer {
+        .start {
             flex: 0;
             color: #7A8185;
             font-size: 18px;
-            cursor: pointer;
         }
         </style>
         <div class="app-bar-style sticky">
-            <div>
+            <div class="start">
             <slot name="start"></slot>
             </div>
             <div class="app-bar-title">
             <slot></slot>
             </div>
-            <div class="action-create-post">
+            <div class="end">
                 <slot name="end"></slot>
             </div>
         </div>

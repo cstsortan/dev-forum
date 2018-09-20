@@ -4,8 +4,10 @@ import { navigate } from "../../actions/router-actions";
 import { routes } from "../../routes";
 import { Post } from "../../interfaces/Post";
 import { Tag } from "../../interfaces/tag";
-import { getTagsCol, addPost } from "../../services/posts-service";
+import { addPost } from "../../services/posts-service";
 import { Subscription } from "rxjs";
+import { getState$ } from "../../utils/get-state";
+import { AppState } from "../../reducers";
 
 class DfPostForm extends LitElement {
 
@@ -32,7 +34,8 @@ class DfPostForm extends LitElement {
     _sub!: Subscription;
 
     connectedCallback() {
-        this._sub = getTagsCol().subscribe(tags => this.tags = tags);
+        this._sub = getState$(store)
+            .subscribe(state => this.tags = (state as AppState).postsList.tags);
     }
 
     disconnectedCallback() {

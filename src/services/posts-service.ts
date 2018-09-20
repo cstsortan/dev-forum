@@ -24,6 +24,12 @@ export async function getPosts() : Promise<Post[]> {
     return fetchedPosts as Post[];
 }
 
+export async function getTags(): Promise<Tag[]> {
+    const response = await fetch('https://dev-forum-45f8b.firebaseapp.com/api/tags');
+    const fetchedTags = await response.json();
+    return fetchedTags as Tag[];
+}
+
 export function getPostDoc(postId: string): Observable<Post> {
     return lazyLoad().pipe(switchMap(({app, rxfire}) => {
         return rxfire.docData(app.firestore().doc(`posts/${postId}`), 'id');

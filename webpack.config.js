@@ -42,6 +42,12 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.js']
     },
+    // externals: [{
+    //     'firebase/app': 'firebase',
+    //     'firebase/auth': 'firebase',
+    //     'firebase/firestore': 'firebase',
+    //     'firebaseui': 'firebaseui'
+    // }],
     plugins: [
         // new webpack.HotModuleReplacementPlugin(),
         new UglifyJSPlugin({

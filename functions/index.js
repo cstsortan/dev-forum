@@ -35,6 +35,16 @@ app.get('/api/posts', (req, res) => {
     }).catch(err => {
         res.sendStatus(404).send({error: err})
     })
+});
+
+app.get('/api/tags', (req, res) => {
+    res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
+    db.collection('tags').orderBy('name').get().then(snap => {
+        res.send(snap.docs.map(mapDocToPost));
+        return
+    }).catch(err => {
+        res.sendStatus(404).send({error: err});
+    });
 })
 
 exports.defForum = functions.https.onRequest(app);
